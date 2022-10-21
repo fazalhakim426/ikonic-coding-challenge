@@ -16,9 +16,15 @@ class RequestsSeeder extends Seeder
      */
     public function run()
     {
+        //randomly connecting users.
+        //Randoml sending and approving user request.
+
+
        $users=  User::get();
        foreach($users as $user){
             $follow = User::inRandomOrder()->get();
+            //Here were are connent/sent request to half users only.
+            //half user leaving for suggestion and received.
             foreach(range(1,$follow->count()/2) as $i){
                 // Follow if not me and not follower.
                 if($follow[$i]->id != $user->id && 
@@ -28,6 +34,7 @@ class RequestsSeeder extends Seeder
                     Follow::updateOrCreate([
                         'followerId' => $user->id,
                         'followeeId' => $follow[$i]->id,
+                        //randomly approve or pending request.
                         'approved'   => rand(0,1), 
                     ],[
                         'followerId' => $user->id,

@@ -7,14 +7,15 @@
       <td class="align-middle">
     </table>
     <div>
-      <button style="width: 220px" 
+      <button style="width: 220px"  
                 onclick="getConnectionsInCommon({{$user->id}})" 
                 id="{{'get_connections_in_common_'.$user->id}}"
-         class="btn btn-primary" type="button"
+         class="btn btn-primary 
+         @if($user->connections->whereIn('id',Auth::user()->connections->pluck('id')->toArray())->count()<1) disabled @endif" type="button"
         data-bs-toggle="collapse" data-bs-target="{{'#collapse_'.$user->id}}" aria-expanded="false" aria-controls="collapseExample">
         Connections in common ({{ $user->connections->whereIn('id',Auth::user()->connections->pluck('id')->toArray())->count()}})
       </button>
-      <button  onclick="withdrawRequest({{$user->pivot->id}},true)" id="create_request_btn_" class="btn btn-danger me-1">Remove Connection</button>
+      <button  onclick="deleteRequest({{$user->pivot->id}})" id="create_request_btn_" class="btn btn-danger me-1">Remove Connection</button>
     </div>
 
   </div>

@@ -11,7 +11,7 @@
 
       @if ($mode == 'sent')
         <button id="cancel_request_btn_" class="btn btn-danger me-1"
-          onclick="withdrawRequest( {{$user->pivot->id }},false)">Withdraw Request</button>
+          onclick="withdrawRequest( {{$user->pivot->id}})">Withdraw Request</button>
       @else
         <button id="accept_request_btn_" class="btn btn-primary me-1"
           onclick="acceptRequest({{$user->pivot->id}},false)">Accept</button>

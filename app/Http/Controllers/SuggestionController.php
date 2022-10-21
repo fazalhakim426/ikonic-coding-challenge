@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\ConnectRequest;
-use App\Models\Follow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
@@ -25,16 +22,6 @@ class SuggestionController extends Controller
                     'page' => $page
                 ]
             )->render()
-        ]);
-    }
-
-    public function store(ConnectRequest $request)
-    {
-        Follow::create($request->validated());
-        return response()->json([
-            'success' => true,
-            'message' => 'Request sent successfully',
-
         ]);
     }
 }

@@ -30,12 +30,5 @@ class SentController extends Controller
   }
 
 
-  public function destroy(Follow $follow)
-  {
-    $follow->delete();
-    return response()->json([
-      "success" => true,
-      "message" => "request cancelled!"
-    ]);
-  }
+
 }

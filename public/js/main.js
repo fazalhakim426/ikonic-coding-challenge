@@ -47,7 +47,7 @@ function acceptRequest(requestId) {
     [onAcceptSuccess, ['response']]
   ];
 
-  ajax('/accept/' + requestId, 'GET', functionsOnSuccess);
+  ajax('/received/approve/' + requestId, 'GET', functionsOnSuccess);
 }
 
 function onAcceptSuccess(response) {
@@ -64,35 +64,34 @@ function connectRequest(userId, requestId) {
     [onConnectSuccess, ['response']]
   ];
 
-  ajax('/connect', 'POST', functionsOnSuccess, form);
+  ajax('/connection', 'POST', functionsOnSuccess, form);
 }
 
 function onConnectSuccess(response) {
   getSuggestions()
 }
 
-
-
-function withdrawRequest(requestId, isConnection) {
+function deleteRequest(requestId) {
   var functionsOnSuccess = [
-    [onWithdrawSuccess, [isConnection]]
+    [onDeleteSuccess, ['response']]
   ];
-
-  ajax('/withdraw/' + requestId, 'DELETE', functionsOnSuccess);
+  ajax('/connection/' + requestId, 'DELETE', functionsOnSuccess);
 }
 
-function onWithdrawSuccess(isConnection) {
-  // hide skeletons
-  hideSkeleton()
-
-  if (isConnection)
-    getConnections()
-  else
-    getSent()
+function onDeleteSuccess(response) {
+  getConnections();
+}
+function withdrawRequest(requestId) {
+  var functionsOnSuccess = [
+    [onWindowSuccess, ['response']]
+  ];
+  ajax('/connection/' + requestId, 'DELETE', functionsOnSuccess);
+}
+function onWindowSuccess(response) {
+  getSent()
 }
 
 $(function () {
-
   showSkeleton()
   getSuggestions();
 });
